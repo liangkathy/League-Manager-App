@@ -1,24 +1,47 @@
 package com.example.leaguemanagerapp.controller;
 
+import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PlayerController {
     @Autowired
     PlayerService playerService;
-    //Crud operations below
 
     //BASIC CRUD
 
-    //GET
+    //GET - Retrieve a player by ID
+@GetMapping("/players/{id}")
+    public List<Player> getPlayerbyID(@PathVariable int id) {
+    return playerService.getPlayerbyID(id);
+}
 
-    //POST
+//Get ALL players
+    @GetMapping("/players")
+    public List<Player> getAllPlayers() {
+    return playerService.getAllPlayers();
+    }
+    //POST - Create a new player
+@PostMapping("/players")
+public Player createPlayer (@RequestBody Player player) {
+    return playerService.addplayer(player);
+}
 
-    //PUT
+    //PUT - Update player by ID
+@PutMapping("/players/{id}")
+public Player updatePlayer(@PathVariable int id @RequestBody Player player) {
+    return playerService.updatePlayer(id,player);
+}
 
-    //Del
+    //del - Delete a player
+    @DeleteMapping("/players/{id}")
+    public void deletePlayer(@PathVariable int id) {
+    playerService.deletePlayer(id);
+    }
 
     //More advanced Operations
 } //last closing bracket
