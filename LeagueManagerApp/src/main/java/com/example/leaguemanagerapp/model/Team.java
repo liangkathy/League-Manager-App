@@ -22,7 +22,7 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<Player> players;
 
-    //many-to-many relationship with team
+    //many-to-many relationship with tournament
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="team_tournament",
