@@ -36,7 +36,7 @@ public class TeamController {
     //PUT
     //update a team
     @PutMapping("/teams/{id}")
-    public Team updateTeam(Integer id, @RequestBody Team team) throws Exception {
+    public Team updateTeam(@PathVariable Integer id, @RequestBody Team team) throws Exception {
         return teamService.updateTeam(id, team);
     }
 

@@ -19,7 +19,7 @@ public class Team {
     private String name;
 
     //one-to-many relationship with player
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Player> players;
 
     //many-to-many relationship with tournament

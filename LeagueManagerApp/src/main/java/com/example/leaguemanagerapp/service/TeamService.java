@@ -41,9 +41,6 @@ public class TeamService {
         Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id "+ id + " not found"));
         existingTeam.setName(team.getName());
 
-//        existingTeam.setPlayers(team.getPlayers());
-//        existingTeam.setTournaments(team.getTournaments());
-
         return teamRepository.save(existingTeam);
     }
 
