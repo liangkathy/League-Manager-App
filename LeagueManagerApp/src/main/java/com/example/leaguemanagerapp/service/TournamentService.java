@@ -1,12 +1,45 @@
 package com.example.leaguemanagerapp.service;
 
+import com.example.leaguemanagerapp.model.Tournament;
 import com.example.leaguemanagerapp.repository.ITournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TournamentService {
 
     @Autowired
     ITournamentRepository tournamentRepository;
+
+    //get all tournaments
+    public List<Tournament> getAllTournaments(){
+        return tournamentRepository.findAll();
+    }
+
+    //get tournament by id
+    public Tournament getTournamentById(Integer id) throws Exception {
+        return tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id "+ id + " not found"));
+    }
+
+    //create a tournament
+    public Tournament createTournament(Tournament tournament) {
+        return tournamentRepository.save(tournament);
+    }
+
+    //update a tournament
+    public Tournament updateTournament(Integer id, Tournament tournament) throws Exception {
+        Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id "+ id + " not found"));
+
+        existingTournament.setName(tournament.getName());
+
+        return tournamentRepository.save(existingTournament);
+    }
+
+    //delete a tournament
+    public void deleteTournament(Integer id){
+        tournamentRepository.deleteById(id);
+    }
+
 }
