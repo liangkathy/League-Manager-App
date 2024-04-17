@@ -1,5 +1,6 @@
 package com.example.leaguemanagerapp.controller;
 
+import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.model.Team;
 import com.example.leaguemanagerapp.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,13 @@ public class TeamController {
     @DeleteMapping("/teams/{id}")
     public void deleteTeam(@PathVariable Integer id){
         teamService.deleteTeam(id);
+    }
+
+    //ADDITIONAL FUNCTIONALITY
+    //add player to a team
+    @PostMapping("/teams/{id}/players")
+    public Team addPlayerToTeam(@PathVariable Integer id, @RequestBody Player player) throws Exception {
+        return teamService.addPlayerToTeam(id, player);
     }
 
 }
