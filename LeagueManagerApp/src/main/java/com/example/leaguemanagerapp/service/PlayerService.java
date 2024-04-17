@@ -14,7 +14,7 @@ public class PlayerService {
     IPlayerRepository playerRepository;
 
 
-    public List<Player> getPlayerbyID(Integer id) {
+    public Player getPlayerbyID(Integer id) {
         return playerRepository.findPlayerById(id);
     }
 
@@ -27,11 +27,11 @@ public class PlayerService {
     public Player addplayer(Player player) {
         return playerRepository.save(player);
     }
-public Player updatePlayer (){
+public Player updatePlayer (Integer id, Player player){
         Player currentPlayer = playerRepository.findPlayerById(id);
-        currentPlayer.setName(currentPlayer.getName());
-        currentPlayer.setTeam(currentPlayer.getTeam());
-        return playerRepository.save((currentPlayer));
+        currentPlayer.setName(player.getName());
+        currentPlayer.setTeam(player.getTeam());
+        return playerRepository.save((player));
 
 }
     public void deletePlayer(int id) {
