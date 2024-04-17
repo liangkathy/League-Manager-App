@@ -1,5 +1,6 @@
 package com.example.leaguemanagerapp.controller;
 
+import com.example.leaguemanagerapp.model.Team;
 import com.example.leaguemanagerapp.model.Tournament;
 import com.example.leaguemanagerapp.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,24 +28,33 @@ public class TournamentController {
     }
 
     //POST
-//create a new tournament
+    //create a new tournament
     @PostMapping("/tournaments")
     public Tournament createTournament(@RequestBody Tournament tournament) {
         return tournamentService.createTournament(tournament);
     }
 
     //PUT
-//update a tournament
+    //update a tournament
     @PutMapping("/tournaments/{id}")
     public Tournament updateTournament(@PathVariable Integer id, @RequestBody Tournament tournament) throws Exception {
         return tournamentService.updateTournament(id, tournament);
     }
 
     //DELETE
-//delete a tournament
+    //delete a tournament
     @DeleteMapping("/tournaments/{id}")
     public void deleteTournament(@PathVariable Integer id){
         tournamentService.deleteTournament(id);
     }
+
+
+    //ADDITIONAL FUNCTIONALITY
+    //add team to tournament
+    @PostMapping("/tournaments/{id}/teams")
+    public Tournament addTeamToTournament(@PathVariable Integer id, @RequestBody Team team) throws Exception {
+        return tournamentService.addTeamToTournament(id, team);
+    }
+
 
 }
