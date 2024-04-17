@@ -3,9 +3,7 @@ package com.example.leaguemanagerapp.controller;
 import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +19,11 @@ public class PlayerController {
     public List<Player> getPlayerbyID(@PathVariable int id) {
     return playerService.getPlayerbyID(id); }
 }
-
-    //POST
+    //POST - Create a new player
+@PostMapping("/Players")
+public Player createPlayer (@RequestBody Player player) {
+    return playerService.addplayer(player);
+}
 
     //PUT
 
