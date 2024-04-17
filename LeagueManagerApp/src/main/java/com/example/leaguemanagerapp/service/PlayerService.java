@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class PlayerService {
     @Autowired
     IPlayerRepository playerRepository;
-    @Autowired
-    ITeamRepository teamRepository; //for later
+ 
     
 }
