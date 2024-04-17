@@ -1,4 +1,9 @@
 package com.example.leaguemanagerapp.repository;
 
-public interface ITournamentRepository {
+import com.example.leaguemanagerapp.model.Tournament;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ITournamentRepository extends JpaRepository<Tournament, Integer> {
 }
