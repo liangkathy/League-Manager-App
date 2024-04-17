@@ -18,8 +18,10 @@ public class Player {
 
 
     @JsonIgnore
-    @ManyToOne //(cascade = CascadeType.PERSIST) - this might be able to be excluded
-    @JoinColumn (name = "team_id", nullable =false)
+    @ManyToOne /*(cascade = CascadeType.PERSIST) WE do nOT want this here because we want the cascade to persist on the team
+    Because All teams will have players but not all players will have/need/want teams. So the business logic is to update on team
+    and not on player */
+    @JoinColumn (name = "team_id") //nullable =false removed because we can have a player without them being on a team.
     private Team team;
 
 }

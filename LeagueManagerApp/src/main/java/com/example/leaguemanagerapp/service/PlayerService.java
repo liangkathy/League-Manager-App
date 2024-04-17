@@ -32,7 +32,7 @@ public class PlayerService {
         Player currentPlayer = playerRepository.findPlayerById(id);
         currentPlayer.setName(player.getName());
         currentPlayer.setTeam(player.getTeam());
-        return playerRepository.save((player));
+        return playerRepository.save((currentPlayer));
 
     }
 
