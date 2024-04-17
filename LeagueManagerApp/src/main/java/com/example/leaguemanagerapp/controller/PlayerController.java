@@ -19,6 +19,12 @@ public class PlayerController {
     public List<Player> getPlayerbyID(@PathVariable int id) {
     return playerService.getPlayerbyID(id);
 }
+
+//Get ALL players
+    @GetMapping("/players")
+    public List<Player> getAllPlayers() {
+    return playerService.getAllPlayers();
+    }
     //POST - Create a new player
 @PostMapping("/players")
 public Player createPlayer (@RequestBody Player player) {
@@ -31,7 +37,11 @@ public Player updatePlayer(@PathVariable int id @RequestBody Player player) {
     return playerService.updatePlayer(id,player);
 }
 
-    //Del
+    //del - Delete a player
+    @DeleteMapping("/players/{id}")
+    public void deletePlayer(@PathVariable int id) {
+    playerService.deletePlayer(id);
+    }
 
     //More advanced Operations
 } //last closing bracket
