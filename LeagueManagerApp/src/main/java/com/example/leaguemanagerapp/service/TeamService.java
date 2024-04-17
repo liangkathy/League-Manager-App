@@ -72,7 +72,7 @@ public class TeamService {
 
         team.getPlayers().removeIf(player -> player.getId() == playerId);
 
-        Player player = playerRepository.findPlayerById(playerId);
+        Player player = playerRepository.findById(playerId).orElseThrow(() -> new Exception("Player with id " + playerId + " not found"));
         player.setTeam(null);
 
         teamRepository.save(team);
