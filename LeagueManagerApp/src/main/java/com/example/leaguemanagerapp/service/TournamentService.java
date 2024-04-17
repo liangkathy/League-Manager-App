@@ -54,10 +54,10 @@ public class TournamentService {
     //add team to tournament
     public Tournament addTeamToTournament(Integer id, Team team) throws Exception {
         Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
-//        List<Tournament> tournaments = new ArrayList<>();
-//        tournaments.add(existingTournament);
+        List<Tournament> tournaments = new ArrayList<>();
+        tournaments.add(existingTournament);
 
-        team.setTournaments(team.getTournaments());
+        team.setTournaments(tournaments);
         teamRepository.save(team);
 
         existingTournament.getTeams().add(team);
