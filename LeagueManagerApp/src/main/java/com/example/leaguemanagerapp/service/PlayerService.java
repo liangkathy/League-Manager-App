@@ -14,8 +14,8 @@ public class PlayerService {
     IPlayerRepository playerRepository;
 
 
-    public Player getPlayerbyID(Integer id) {
-        return playerRepository.findPlayerById(id);
+    public Player getPlayerbyID(Integer id) throws Exception {
+        return playerRepository.findById(id).orElseThrow(()-> new Exception("Player with id " + id + " not found"));
     }
 
 
@@ -28,8 +28,9 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public Player updatePlayer(Integer id, Player player) {
-        Player currentPlayer = playerRepository.findPlayerById(id);
+    public Player updatePlayer(Integer id, Player player) throws Exception {
+        Player currentPlayer = playerRepository.findById(id).orElseThrow(()-> new RuntimeException("IDd doesnt exist" +
+                "."));
         currentPlayer.setName(player.getName());
         currentPlayer.setTeam(player.getTeam());
         return playerRepository.save((currentPlayer));

@@ -16,7 +16,7 @@ public class PlayerController {
 
     //GET - Retrieve a player by ID
     @GetMapping("/players/{id}")
-    public Player getPlayerbyID(@PathVariable int id) {
+    public Player getPlayerbyID(@PathVariable int id) throws Exception {
         return playerService.getPlayerbyID(id);
     }
 
@@ -34,7 +34,7 @@ public class PlayerController {
 
     //PUT - Update player by ID
     @PutMapping("/players/{id}")
-    public Player updatePlayer(@PathVariable Integer id, @RequestBody Player player) {
+    public Player updatePlayer(@PathVariable Integer id, @RequestBody Player player) throws Exception {
         return playerService.updatePlayer(id, player);
     }
 
