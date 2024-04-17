@@ -28,6 +28,10 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 public Player updatePlayer (){
+        Player currentPlayer = playerRepository.findPlayerById(id);
+        currentPlayer.setName(currentPlayer.getName());
+        currentPlayer.setTeam(currentPlayer.getTeam());
+        return playerRepository.save((currentPlayer));
 
 }
     public void deletePlayer(int id) {
