@@ -16,7 +16,7 @@ public class PlayerController {
 
     //GET - Retrieve a player by ID
     @GetMapping("/players/{id}")
-    public Player getPlayerbyID(@PathVariable int id) {
+    public Player getPlayerbyID(@PathVariable int id) throws Exception {
         return playerService.getPlayerbyID(id);
     }
 

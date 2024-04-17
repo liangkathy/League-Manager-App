@@ -14,8 +14,8 @@ public class PlayerService {
     IPlayerRepository playerRepository;
 
 
-    public Player getPlayerbyID(Integer id) {
-        return playerRepository.findPlayerById(id);
+    public Player getPlayerbyID(Integer id) throws Exception {
+        return playerRepository.findById(id).orElseThrow(()-> new Exception("Player with id " + id + " not found"));
     }
 
 
