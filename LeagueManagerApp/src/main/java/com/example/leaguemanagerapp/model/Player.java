@@ -20,6 +20,6 @@ public class Player {
     @JsonIgnore
     @ManyToOne //(cascade = CascadeType.PERSIST) - this might be able to be excluded
     @JoinColumn (name = "team_id", nullable =false)
-    private Team team;
+    private Team team; //will be linked later
 
 }
