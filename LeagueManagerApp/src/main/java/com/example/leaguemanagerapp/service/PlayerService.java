@@ -35,5 +35,6 @@ public Player updatePlayer (){
 
 }
     public void deletePlayer(int id) {
+        playerRepository.deleteById(id);
     }
 }
