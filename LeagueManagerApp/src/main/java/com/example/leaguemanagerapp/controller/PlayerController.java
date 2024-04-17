@@ -34,7 +34,7 @@ public class PlayerController {
 
     //PUT - Update player by ID
     @PutMapping("/players/{id}")
-    public Player updatePlayer(@PathVariable Integer id, @RequestBody Player player) {
+    public Player updatePlayer(@PathVariable Integer id, @RequestBody Player player) throws Exception {
         return playerService.updatePlayer(id, player);
     }
 

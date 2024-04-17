@@ -7,5 +7,4 @@ import java.util.List;
 
 @Repository
 public interface IPlayerRepository extends JpaRepository <Player, Integer> {
-    Player findPlayerById(Integer id);
 }

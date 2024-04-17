@@ -28,8 +28,9 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public Player updatePlayer(Integer id, Player player) {
-        Player currentPlayer = playerRepository.findPlayerById(id);
+    public Player updatePlayer(Integer id, Player player) throws Exception {
+        Player currentPlayer = playerRepository.findById(id).orElseThrow(()-> new RuntimeException("IDd doesnt exist" +
+                "."));
         currentPlayer.setName(player.getName());
         currentPlayer.setTeam(player.getTeam());
         return playerRepository.save((currentPlayer));
