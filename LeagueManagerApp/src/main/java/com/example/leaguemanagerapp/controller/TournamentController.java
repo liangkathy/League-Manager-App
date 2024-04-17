@@ -1,5 +1,6 @@
 package com.example.leaguemanagerapp.controller;
 
+import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.model.Team;
 import com.example.leaguemanagerapp.model.Tournament;
 import com.example.leaguemanagerapp.service.TournamentService;
@@ -61,6 +62,19 @@ public class TournamentController {
     @DeleteMapping("/tournaments/{id}/teams/{teamId}")
     public void deleteTeamFromTournament(@PathVariable Integer id, @PathVariable Integer teamId) throws Exception {
         tournamentService.deleteTeamFromTournament(id, teamId);
+    }
+
+    //get all teams in a tournament
+    @GetMapping("/tournaments/{id}/teams")
+    public List<Team> getAllTeamsFromTournament(@PathVariable Integer id) throws Exception {
+        return tournamentService.getAllTeamsFromTournament(id);
+    }
+
+
+    //get a list of all the players in a tournament
+    @GetMapping("/tournaments/{id}/players")
+    public List<Player> getAllPlayersFromTournament(@PathVariable Integer id) throws Exception {
+        return tournamentService.getAllPlayersFromTournament(id);
     }
 
 }
