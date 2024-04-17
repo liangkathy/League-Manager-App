@@ -64,4 +64,19 @@ public class TeamService {
 
         return teamRepository.save(existingTeam);
     }
+
+
+    //delete a player from a team
+    public void deletePlayerFromTeam(Integer id, Integer playerId) throws Exception {
+        Team team = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+
+        team.getPlayers().removeIf(player -> player.getId() == playerId);
+
+        Player player = playerRepository.findPlayerById(playerId);
+        player.setTeam(null);
+
+        teamRepository.save(team);
+        playerRepository.save(player);
+
+    }
 }

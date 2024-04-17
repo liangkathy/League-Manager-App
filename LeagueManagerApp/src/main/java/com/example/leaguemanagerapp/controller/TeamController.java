@@ -55,4 +55,10 @@ public class TeamController {
         return teamService.addPlayerToTeam(id, player);
     }
 
+    //delete a player from a team
+    @DeleteMapping("/teams/{id}/players/{playerId}")
+    public void deletePlayerFromTeam(@PathVariable Integer id, @PathVariable Integer playerId) throws Exception {
+        teamService.deletePlayerFromTeam(id, playerId);
+    }
+
 }
