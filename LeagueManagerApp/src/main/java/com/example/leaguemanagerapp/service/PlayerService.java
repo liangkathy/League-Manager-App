@@ -27,13 +27,15 @@ public class PlayerService {
     public Player addplayer(Player player) {
         return playerRepository.save(player);
     }
-public Player updatePlayer (Integer id, Player player){
+
+    public Player updatePlayer(Integer id, Player player) {
         Player currentPlayer = playerRepository.findPlayerById(id);
         currentPlayer.setName(player.getName());
         currentPlayer.setTeam(player.getTeam());
         return playerRepository.save((player));
 
-}
+    }
+
     public void deletePlayer(int id) {
         playerRepository.deleteById(id);
     }
