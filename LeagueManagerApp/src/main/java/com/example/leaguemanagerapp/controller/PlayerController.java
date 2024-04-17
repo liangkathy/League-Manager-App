@@ -15,32 +15,33 @@ public class PlayerController {
     //BASIC CRUD
 
     //GET - Retrieve a player by ID
-@GetMapping("/players/{id}")
+    @GetMapping("/players/{id}")
     public List<Player> getPlayerbyID(@PathVariable int id) {
-    return playerService.getPlayerbyID(id);
-}
+        return playerService.getPlayerbyID(id);
+    }
 
-//Get ALL players
+    //Get ALL players
     @GetMapping("/players")
     public List<Player> getAllPlayers() {
-    return playerService.getAllPlayers();
+        return playerService.getAllPlayers();
     }
+
     //POST - Create a new player
-@PostMapping("/players")
-public Player createPlayer (@RequestBody Player player) {
-    return playerService.addplayer(player);
-}
+    @PostMapping("/players")
+    public Player createPlayer(@RequestBody Player player) {
+        return playerService.addplayer(player);
+    }
 
     //PUT - Update player by ID
-@PutMapping("/players/{id}")
-public Player updatePlayer(@PathVariable int id @RequestBody Player player) {
-    return playerService.updatePlayer(id,player);
-}
+    @PutMapping("/players/{id}")
+    public Player updatePlayer(@PathVariable Integer id @RequestBody Player player) {
+        return playerService.updatePlayer(id, player);
+    }
 
     //del - Delete a player
     @DeleteMapping("/players/{id}")
-    public void deletePlayer(@PathVariable int id) {
-    playerService.deletePlayer(id);
+    public void deletePlayer(@PathVariable Integer id) {
+        playerService.deletePlayer(id);
     }
 
     //More advanced Operations
