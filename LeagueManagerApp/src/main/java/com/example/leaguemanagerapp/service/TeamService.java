@@ -1,5 +1,6 @@
 package com.example.leaguemanagerapp.service;
 
+import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.model.Team;
 import com.example.leaguemanagerapp.repository.IPlayerRepository;
 import com.example.leaguemanagerapp.repository.ITeamRepository;
@@ -47,5 +48,19 @@ public class TeamService {
     //delete a team
     public void deleteTeam(Integer id){
         teamRepository.deleteById(id);
+    }
+
+
+    //ADDITIONAL FUNCTIONALITY
+    public Team addPlayerToTeam(Integer id, Player player) throws Exception {
+        Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+
+        player.setTeam(existingTeam);
+
+        existingTeam.getPlayers().add(player);
+
+        playerRepository.save(player);
+
+        return teamRepository.save(existingTeam);
     }
 }
