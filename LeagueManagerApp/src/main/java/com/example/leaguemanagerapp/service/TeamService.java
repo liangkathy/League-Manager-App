@@ -52,6 +52,7 @@ public class TeamService {
 
 
     //ADDITIONAL FUNCTIONALITY
+    //add player to team
     public Team addPlayerToTeam(Integer id, Player player) throws Exception {
         Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
 
