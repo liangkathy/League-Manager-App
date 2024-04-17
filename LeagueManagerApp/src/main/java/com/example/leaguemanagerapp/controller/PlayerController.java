@@ -17,15 +17,19 @@ public class PlayerController {
     //GET - Retrieve a player by ID
 @GetMapping("/players/{id}")
     public List<Player> getPlayerbyID(@PathVariable int id) {
-    return playerService.getPlayerbyID(id); }
+    return playerService.getPlayerbyID(id);
 }
     //POST - Create a new player
-@PostMapping("/Players")
+@PostMapping("/players")
 public Player createPlayer (@RequestBody Player player) {
     return playerService.addplayer(player);
 }
 
-    //PUT
+    //PUT - Update player by ID
+@PutMapping("/players/{id}")
+public Player updatePlayer(@PathVariable int id @RequestBody Player player) {
+    return playerService.updatePlayer(id,player);
+}
 
     //Del
 
