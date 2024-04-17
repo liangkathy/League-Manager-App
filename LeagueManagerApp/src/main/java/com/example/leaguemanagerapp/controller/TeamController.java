@@ -9,4 +9,12 @@ public class TeamController {
 
     @Autowired
     TeamService teamService;
+
+    //GET
+
+    //POST
+
+    //PUT
+
+    //DELETE
 }
