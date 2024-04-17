@@ -65,5 +65,19 @@ public class TournamentService {
     }
 
 
+    //delete a team from a tournament
+    public void deleteTeamFromTournament(Integer id, Integer teamId) throws Exception {
+        Tournament tournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+        tournament.getTeams().removeIf(t -> t.getId() == teamId);
+
+        Team team = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+        team.getTournaments().removeIf(t -> t.getId() == id);
+
+        tournamentRepository.save(tournament);
+        teamRepository.save(team);
+
+    }
+
+
 
 }
