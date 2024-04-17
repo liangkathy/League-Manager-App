@@ -22,7 +22,7 @@ public class Tournament {
 
     //many-to-many relationship with team
     @JsonIgnore
-    @ManyToMany(mappedBy = "tournaments")
+    @ManyToMany(mappedBy = "tournaments", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<Team> teams = new ArrayList<>();
 
 }
