@@ -1,5 +1,6 @@
 package com.example.leaguemanagerapp.service;
 
+import com.example.leaguemanagerapp.model.Player;
 import com.example.leaguemanagerapp.model.Team;
 import com.example.leaguemanagerapp.model.Tournament;
 import com.example.leaguemanagerapp.repository.ITeamRepository;
@@ -65,5 +66,37 @@ public class TournamentService {
     }
 
 
+    //delete a team from a tournament
+    public void deleteTeamFromTournament(Integer id, Integer teamId) throws Exception {
+        Tournament tournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+        tournament.getTeams().removeIf(t -> t.getId() == teamId);
 
+        Team team = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+        team.getTournaments().removeIf(t -> t.getId() == id);
+
+        tournamentRepository.save(tournament);
+        teamRepository.save(team);
+
+    }
+
+
+    //get all teams in a tournament
+    public List<Team> getAllTeamsFromTournament(Integer id) throws Exception {
+        Tournament tournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+        return tournament.getTeams();
+    }
+
+    //get a list of all the players in a tournament
+    public List<Player> getAllPlayersFromTournament(Integer id) throws Exception {
+        Tournament tournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+
+        List <Team> teams = tournament.getTeams();
+        List<Player> players = new ArrayList<>();
+
+        for (Team team : teams) {
+            players.addAll(team.getPlayers());
+        }
+        
+        return players;
+    }
 }
