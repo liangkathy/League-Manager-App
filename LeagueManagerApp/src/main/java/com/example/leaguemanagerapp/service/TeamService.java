@@ -77,6 +77,22 @@ public class TeamService {
         }
     }
 
+    //add existing player to team
+    public Team addExistingPlayerToTeam(Integer id, Integer playerId) throws Exception {
+        Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+        Player existingPlayer = playerRepository.findById(playerId).orElseThrow(() -> new Exception("Player with id " + playerId + " not found"));
+
+        if (existingTeam.getPlayers().contains(existingPlayer)) {
+            throw new Exception("Player with id " + playerId + " already assigned to this team");
+        } else if (existingPlayer.getTeam() != null) {
+            throw new Exception("Player with id " + playerId + " already assigned to an existing team");
+        } else {
+            existingPlayer.setTeam(existingTeam);
+            existingTeam.getPlayers().add(existingPlayer);
+            return teamRepository.save(existingTeam);
+        }
+    }
+
 
     //delete a player from a team
     public void deletePlayerFromTeam(Integer id, Integer playerId) throws Exception {

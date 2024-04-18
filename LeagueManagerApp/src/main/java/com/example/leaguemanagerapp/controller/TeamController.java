@@ -55,6 +55,12 @@ public class TeamController {
         return teamService.addPlayerToTeam(id, player);
     }
 
+    //add existing player to a team
+    @PutMapping("/teams/{id}/players/{playerId}")
+    public Team addExistingPlayerToTeam(@PathVariable Integer id, @PathVariable Integer playerId) throws Exception {
+        return teamService.addExistingPlayerToTeam(id, playerId);
+    }
+
     //delete a player from a team
     @DeleteMapping("/teams/{id}/players/{playerId}")
     public void deletePlayerFromTeam(@PathVariable Integer id, @PathVariable Integer playerId) throws Exception {
