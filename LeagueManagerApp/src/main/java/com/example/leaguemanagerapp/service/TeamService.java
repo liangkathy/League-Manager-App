@@ -54,8 +54,13 @@ public class TeamService {
     }
 
     //delete a team
-    public void deleteTeam(Integer id){
-        teamRepository.deleteById(id);
+    public String deleteTeam(Integer id){
+        if (teamRepository.findById(id).isPresent()) {
+            teamRepository.deleteById(id);
+            return "Team with id " + id + " successfully deleted";
+        } else {
+            return "Team with id " + id + " not found";
+        }
     }
 
 

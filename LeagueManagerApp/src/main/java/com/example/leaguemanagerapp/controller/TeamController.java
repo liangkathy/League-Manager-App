@@ -44,8 +44,8 @@ public class TeamController {
     //DELETE
     //delete a team
     @DeleteMapping("/teams/{id}")
-    public void deleteTeam(@PathVariable Integer id){
-        teamService.deleteTeam(id);
+    public String deleteTeam(@PathVariable Integer id){
+        return teamService.deleteTeam(id);
     }
 
     //ADDITIONAL FUNCTIONALITY
