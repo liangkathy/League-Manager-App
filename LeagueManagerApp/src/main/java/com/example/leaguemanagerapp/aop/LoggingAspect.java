@@ -27,7 +27,7 @@ public class LoggingAspect {
     @Around("serviceMethods()")
     public Object loggingServiceMethods(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         log.info(" Around method:" + proceedingJoinPoint.getSignature().toShortString() + "; Before Trigger time:" + System.currentTimeMillis());
-       Object  rtn = proceedingJoinPoint.proceed();
+        Object rtn = proceedingJoinPoint.proceed();
         log.info("After the proceed:" + proceedingJoinPoint.getSignature().toShortString() + "; After Trigger time:" + System.currentTimeMillis());
         return rtn;
     }
