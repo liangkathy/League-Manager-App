@@ -33,16 +33,24 @@ public class TeamService {
     }
 
     //create a team
-    public Team createTeam(Team team) {
-        return teamRepository.save(team);
+    public Team createTeam(Team team) throws Exception {
+        if (team.getName().isEmpty() || team.getName().isBlank()) {
+            throw new Exception("Team name cannot be empty");
+        }  else {
+            return teamRepository.save(team);
+        }
     }
 
     //update a team
     public Team updateTeam(Integer id, Team team) throws Exception {
         Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id "+ id + " not found"));
-        existingTeam.setName(team.getName());
 
-        return teamRepository.save(existingTeam);
+        if (team.getName().isEmpty() || team.getName().isBlank()) {
+            throw new Exception("Team name cannot be empty");
+        }  else {
+            existingTeam.setName(team.getName());
+            return teamRepository.save(existingTeam);
+        }
     }
 
     //delete a team

@@ -30,7 +30,7 @@ public class TeamController {
     //POST
     //create a new team
     @PostMapping("/teams")
-    public Team createTeam(@RequestBody Team team){
+    public Team createTeam(@RequestBody Team team) throws Exception {
         return teamService.createTeam(team);
     }
 
