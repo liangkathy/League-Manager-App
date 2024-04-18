@@ -63,14 +63,13 @@ public class TeamService {
     //add player to team
     public Team addPlayerToTeam(Integer id, Player player) throws Exception {
         Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
-
-        player.setTeam(existingTeam);
-
-        existingTeam.getPlayers().add(player);
-
-        playerRepository.save(player);
-
-        return teamRepository.save(existingTeam);
+        if (player.getName().isEmpty() || player.getName().isBlank()) {
+            throw new Exception("Player name cannot be empty");
+        } else {
+            player.setTeam(existingTeam);
+            existingTeam.getPlayers().add(player);
+            return teamRepository.save(existingTeam);
+        }
     }
 
 
@@ -85,6 +84,5 @@ public class TeamService {
 
         teamRepository.save(team);
         playerRepository.save(player);
-
     }
 }
