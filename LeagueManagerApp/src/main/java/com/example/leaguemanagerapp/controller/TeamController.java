@@ -44,7 +44,7 @@ public class TeamController {
     //DELETE
     //delete a team
     @DeleteMapping("/teams/{id}")
-    public String deleteTeam(@PathVariable Integer id){
+    public String deleteTeam(@PathVariable Integer id) throws Exception {
         return teamService.deleteTeam(id);
     }
 

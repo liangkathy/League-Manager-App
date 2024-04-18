@@ -54,12 +54,12 @@ public class TeamService {
     }
 
     //delete a team
-    public String deleteTeam(Integer id){
+    public String deleteTeam(Integer id) throws Exception {
         if (teamRepository.findById(id).isPresent()) {
             teamRepository.deleteById(id);
             return "Team with id " + id + " successfully deleted";
         } else {
-            return "Team with id " + id + " not found";
+            throw new Exception("Team with id " + id + " not found");
         }
     }
 
