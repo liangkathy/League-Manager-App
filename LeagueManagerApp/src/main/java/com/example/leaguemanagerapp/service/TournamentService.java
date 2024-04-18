@@ -33,7 +33,7 @@ public class TournamentService {
 
     //create a tournament
     public Tournament createTournament(Tournament tournament) throws Exception {
-        if (tournament.getName().isEmpty()) {
+        if (tournament.getName().isEmpty() || tournament.getName().isBlank()) {
             throw new Exception("Tournament name cannot be empty");
         } else {
             return tournamentRepository.save(tournament);
@@ -44,7 +44,7 @@ public class TournamentService {
     public Tournament updateTournament(Integer id, Tournament tournament) throws Exception {
         Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id "+ id + " not found"));
 
-        if(tournament.getName().isEmpty()) {
+        if(tournament.getName().isEmpty() || tournament.getName().isBlank()) {
             throw new Exception("Tournament name cannot be empty");
         } else {
             existingTournament.setName(tournament.getName());
@@ -62,14 +62,17 @@ public class TournamentService {
     //add team to tournament
     public Tournament addTeamToTournament(Integer id, Team team) throws Exception {
         Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+
         List<Tournament> tournaments = new ArrayList<>();
-        tournaments.add(existingTournament);
 
-        team.setTournaments(tournaments);
-        teamRepository.save(team);
-
-        existingTournament.getTeams().add(team);
-        return tournamentRepository.save(existingTournament);
+        if(team.getName().isEmpty() || team.getName().isBlank()) {
+            throw new Exception("Team name cannot be empty");
+        } else {
+            tournaments.add(existingTournament);
+            teamRepository.save(team);
+            existingTournament.getTeams().add(team);
+            return tournamentRepository.save(existingTournament);
+        }
     }
 
 
