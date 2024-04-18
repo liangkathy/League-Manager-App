@@ -44,7 +44,7 @@ public class TeamController {
     //DELETE
     //delete a team
     @DeleteMapping("/teams/{id}")
-    public String deleteTeam(@PathVariable Integer id){
+    public String deleteTeam(@PathVariable Integer id) throws Exception {
         return teamService.deleteTeam(id);
     }
 
@@ -53,6 +53,12 @@ public class TeamController {
     @PostMapping("/teams/{id}/players")
     public Team addPlayerToTeam(@PathVariable Integer id, @RequestBody Player player) throws Exception {
         return teamService.addPlayerToTeam(id, player);
+    }
+
+    //add existing player to a team
+    @PutMapping("/teams/{id}/players/{playerId}")
+    public Team addExistingPlayerToTeam(@PathVariable Integer id, @PathVariable Integer playerId) throws Exception {
+        return teamService.addExistingPlayerToTeam(id, playerId);
     }
 
     //delete a player from a team

@@ -54,12 +54,12 @@ public class TeamService {
     }
 
     //delete a team
-    public String deleteTeam(Integer id){
+    public String deleteTeam(Integer id) throws Exception {
         if (teamRepository.findById(id).isPresent()) {
             teamRepository.deleteById(id);
             return "Team with id " + id + " successfully deleted";
         } else {
-            return "Team with id " + id + " not found";
+            throw new Exception("Team with id " + id + " not found");
         }
     }
 
@@ -73,6 +73,22 @@ public class TeamService {
         } else {
             player.setTeam(existingTeam);
             existingTeam.getPlayers().add(player);
+            return teamRepository.save(existingTeam);
+        }
+    }
+
+    //add existing player to team
+    public Team addExistingPlayerToTeam(Integer id, Integer playerId) throws Exception {
+        Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+        Player existingPlayer = playerRepository.findById(playerId).orElseThrow(() -> new Exception("Player with id " + playerId + " not found"));
+
+        if (existingTeam.getPlayers().contains(existingPlayer)) {
+            throw new Exception("Player with id " + playerId + " already assigned to this team");
+        } else if (existingPlayer.getTeam() != null) {
+            throw new Exception("Player with id " + playerId + " already assigned to an existing team");
+        } else {
+            existingPlayer.setTeam(existingTeam);
+            existingTeam.getPlayers().add(existingPlayer);
             return teamRepository.save(existingTeam);
         }
     }
