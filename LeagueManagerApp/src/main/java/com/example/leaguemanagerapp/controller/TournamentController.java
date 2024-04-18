@@ -45,7 +45,7 @@ public class TournamentController {
     //DELETE
     //delete a tournament
     @DeleteMapping("/tournaments/{id}")
-    public String deleteTournament(@PathVariable Integer id){
+    public String deleteTournament(@PathVariable Integer id) throws Exception {
         return tournamentService.deleteTournament(id);
     }
 
