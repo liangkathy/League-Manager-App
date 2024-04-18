@@ -24,16 +24,27 @@ public class PlayerService {
     }
 
 
-    public Player addplayer(Player player) {
-        return playerRepository.save(player);
+
+
+    public Player addplayer(Player player) throws Exception {
+        if (player.getName().isEmpty() || player.getName().isBlank()) {
+            throw new Exception("Player can not be empty");
+        } else {
+            return playerRepository.save(player);
+        }
+
     }
 
     public Player updatePlayer(Integer id, Player player) throws Exception {
-        Player currentPlayer = playerRepository.findById(id).orElseThrow(()-> new RuntimeException("IDd doesnt exist" +
+        Player currentPlayer = playerRepository.findById(id).orElseThrow(() -> new RuntimeException("IDd doesnt exist" +
                 "."));
-        currentPlayer.setName(player.getName());
-        currentPlayer.setTeam(player.getTeam());
-        return playerRepository.save((currentPlayer));
+        if (player.getName().isBlank() || player.getName().isEmpty()) {
+            throw new Exception("player name can not be empty");
+        } else {
+            currentPlayer.setName(player.getName());
+            currentPlayer.setTeam(player.getTeam());
+            return playerRepository.save((currentPlayer));
+        }
 
     }
 
