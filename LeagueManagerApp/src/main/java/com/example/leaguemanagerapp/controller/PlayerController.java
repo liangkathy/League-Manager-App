@@ -28,7 +28,7 @@ public class PlayerController {
 
     //POST - Create a new player
     @PostMapping("/players")
-    public Player createPlayer(@RequestBody Player player) {
+    public Player createPlayer(@RequestBody Player player) throws Exception {
         return playerService.addplayer(player);
     }
 
