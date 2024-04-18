@@ -53,8 +53,13 @@ public class TournamentService {
     }
 
     //delete a tournament
-    public void deleteTournament(Integer id){
-        tournamentRepository.deleteById(id);
+    public String deleteTournament(Integer id){
+        if (tournamentRepository.findById(id).isPresent()) {
+            tournamentRepository.deleteById(id);
+            return "Tournament with id " + id + " successfully deleted";
+        } else {
+            return "Tournament with id " + id + " not found";
+        }
     }
 
 

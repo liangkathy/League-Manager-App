@@ -48,7 +48,13 @@ public class PlayerService {
     }
 
     //delete a player
-    public void deletePlayer(int id) {
-        playerRepository.deleteById(id);
+    public String deletePlayer(int id) {
+        if (playerRepository.findById(id).isPresent()) {
+            playerRepository.deleteById(id);
+            return "Player with id " + id + " successfully deleted";
+        } else {
+            return "Player with id " + id + " not found";
+        }
+
     }
 }
