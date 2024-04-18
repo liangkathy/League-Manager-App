@@ -32,17 +32,24 @@ public class TournamentService {
     }
 
     //create a tournament
-    public Tournament createTournament(Tournament tournament) {
-        return tournamentRepository.save(tournament);
+    public Tournament createTournament(Tournament tournament) throws Exception {
+        if (tournament.getName().isEmpty()) {
+            throw new Exception("Tournament name cannot be empty");
+        } else {
+            return tournamentRepository.save(tournament);
+        }
     }
 
     //update a tournament
     public Tournament updateTournament(Integer id, Tournament tournament) throws Exception {
         Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id "+ id + " not found"));
 
-        existingTournament.setName(tournament.getName());
-
-        return tournamentRepository.save(existingTournament);
+        if(tournament.getName().isEmpty()) {
+            throw new Exception("Tournament name cannot be empty");
+        } else {
+            existingTournament.setName(tournament.getName());
+            return tournamentRepository.save(existingTournament);
+        }
     }
 
     //delete a tournament

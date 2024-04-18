@@ -31,7 +31,7 @@ public class TournamentController {
     //POST
     //create a new tournament
     @PostMapping("/tournaments")
-    public Tournament createTournament(@RequestBody Tournament tournament) {
+    public Tournament createTournament(@RequestBody Tournament tournament) throws Exception {
         return tournamentService.createTournament(tournament);
     }
 
