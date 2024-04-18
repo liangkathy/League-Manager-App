@@ -45,16 +45,22 @@ public class TournamentController {
     //DELETE
     //delete a tournament
     @DeleteMapping("/tournaments/{id}")
-    public String deleteTournament(@PathVariable Integer id){
+    public String deleteTournament(@PathVariable Integer id) throws Exception {
         return tournamentService.deleteTournament(id);
     }
 
 
     //ADDITIONAL FUNCTIONALITY
-    //add team to tournament
+    //add new team to tournament
     @PostMapping("/tournaments/{id}/teams")
     public Tournament addTeamToTournament(@PathVariable Integer id, @RequestBody Team team) throws Exception {
         return tournamentService.addTeamToTournament(id, team);
+    }
+
+    //add existing team to tournament
+    @PutMapping("/tournaments/{id}/teams/{teamId}")
+    public Tournament addExistingTeamToTournament(@PathVariable Integer id, @PathVariable Integer teamId) throws Exception {
+        return tournamentService.addExistingTeamToTournament(id, teamId);
     }
 
 

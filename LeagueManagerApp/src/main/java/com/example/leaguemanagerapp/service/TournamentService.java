@@ -53,18 +53,18 @@ public class TournamentService {
     }
 
     //delete a tournament
-    public String deleteTournament(Integer id){
+    public String deleteTournament(Integer id) throws Exception {
         if (tournamentRepository.findById(id).isPresent()) {
             tournamentRepository.deleteById(id);
             return "Tournament with id " + id + " successfully deleted";
         } else {
-            return "Tournament with id " + id + " not found";
+            throw new Exception("Tournament with id " + id + " not found");
         }
     }
 
 
     //ADDITIONAL FUNCTIONALITY
-    //add team to tournament
+    //add new team to tournament
     public Tournament addTeamToTournament(Integer id, Team team) throws Exception {
         Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
 
@@ -74,8 +74,24 @@ public class TournamentService {
             throw new Exception("Team name cannot be empty");
         } else {
             tournaments.add(existingTournament);
+            team.setTournaments(tournaments);
             teamRepository.save(team);
             existingTournament.getTeams().add(team);
+            return tournamentRepository.save(existingTournament);
+        }
+    }
+
+    //add existing team to tournament
+    public Tournament addExistingTeamToTournament(Integer id, Integer teamId) throws Exception {
+        Tournament existingTournament = tournamentRepository.findById(id).orElseThrow(() -> new Exception("Tournament with id " + id + " not found"));
+        Team existingTeam = teamRepository.findById(id).orElseThrow(() -> new Exception("Team with id " + id + " not found"));
+
+        if(existingTournament.getTeams().contains(existingTeam)) {
+            throw new Exception("Team with id " + teamId + " already added to this tournament");
+        } else {
+            existingTeam.getTournaments().add(existingTournament);
+            existingTournament.getTeams().add(existingTeam);
+
             return tournamentRepository.save(existingTournament);
         }
     }
@@ -114,4 +130,6 @@ public class TournamentService {
         
         return players;
     }
+
+
 }
