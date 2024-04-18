@@ -40,7 +40,7 @@ public class PlayerController {
 
     //del - Delete a player
     @DeleteMapping("/players/{id}")
-    public String deletePlayer(@PathVariable Integer id) {
+    public String deletePlayer(@PathVariable Integer id) throws Exception {
         return playerService.deletePlayer(id);
     }
 
